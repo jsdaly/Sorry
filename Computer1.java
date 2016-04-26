@@ -1,188 +1,238 @@
+/*
+Julie Daly
+205 Final Project-Computer Logic
+*/
 
 import java.util.*;
 
 public class Computer1{
-   cs205_SorryCards card = new cs205_SorryCards();
+   //Creating necessary objects and assigning the color RED to the computer
+   Deck card = new Deck();
    Color color = Color.RED;
    Pawn pieceOne = new Pawn(color);
    Pawn pieceTwo = new Pawn(color);
    Pawn pieceThree = new Pawn(color);
    Pawn pieceFour = new Pawn(color);
    Board aSpace = new Board();
-   //SquareSpace space= startSpace.getSpace()//needs index though
-   RoundSpace starts = aSpace.getStart(color);//holds space of start for color RED
+   //Holds START space for the color RED
+   RoundSpace starts = aSpace.getStart(color);
+   //Creates arraylist of all pawns
    ArrayList<Pawn> allPawns = new ArrayList<Pawn>();
    
-   int move;
+ 
    
-   protected Computer1(){
+   public Computer1(){
+   //Adds pawns to arraylist
    allPawns.add(pieceOne);
    allPawns.add(pieceTwo);
    allPawns.add(pieceThree);
    allPawns.add(pieceFour);
    }
-   
-   public void moves(){
+   //move method based on card value
+   public void moves()throws BoardException{
+   //Draws card
    int cards = card.draw();
+      //goes through all cards *card 7,10,13 are still being treated as normal cards*
       if (cards==1){
          if (starts.occupied() == true){
-            //move pawn froms start
-           }
-         else if (starts.occupied() == false){
+            //Uses loop to go through array to find the pawn occupying home
+            for (int i=0; i<allPawns.size();i++){
+               if (starts.occupiedBy(allPawns.get(i))==true){
+               //Move one space out of home, home is noted to have index 4 then exits
+               SquareSpace moveTo = aSpace.getSpace(5);
+               aSpace.movePawn(allPawns.get(i), moveTo);
+               
+               System.out.print(cards);
+               System.exit(0);
+               
+               }}}
+         else {
+           //Or passes card number to chooseMove method
            chooseMove(cards);
+           
            }}
            
-      if (cards ==2){
+      else if (cards ==2){
          if (starts.occupied() == true){
-           //move pawn from home
-           }
-         else if (starts.occupied() == false){
+            //Same as card==1 case 
+           for (int i=0; i<allPawns.size();i++){
+               if (starts.occupiedBy(allPawns.get(i))==true){
+               //index 6 instead of 5
+               SquareSpace moveTo = aSpace.getSpace(6);
+               aSpace.movePawn(allPawns.get(i), moveTo);
+                System.out.print(cards);
+               System.exit(0);
+               }}}
+         else {
            chooseMove(cards);
             }}
       
-      if (cards==3){
+      else if (cards==3){
+         //checks if home is not fully occupied then passes to method
          if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(cards);
            }
-         else{
-             chooseMove(cards);
-            
-           }}
+          else{
+            //can't move and exits
+             System.out.print(cards);
+            System.exit(0);}
+           }
            
-      if (cards==4){
+      else if (cards==4){
+         //same as card==3 but passes -4 to move backwards
           if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(-4);
            }
-         else{
-             chooseMove(-4);
-            
-            }}
+           else{
+           System.out.print(cards);
+            System.exit(0);}}
            
-      if (cards==5){ 
+      else if (cards==5){ 
+         //same as above
          if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(cards);
            }
-         else{
-             chooseMove(cards);
+           else{
+           System.out.print(cards);
+            System.exit(0);}}
             
-           }}
+          
            
-      if (cards==7){
-          if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
-           }
-         else{
-            chooseMove(cards);
-            
-            }}
-            
-      if (cards==8){
-          if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
-           }
-         else{
-            chooseMove(cards);
-            
-            }}
-            
-      if (cards==10){
-          if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
-           }
-         else{
-             chooseMove(cards);
-            
-            }}
-            
-      if (cards==11){
-           if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
-           }
-         else{
-             chooseMove(cards);
-            
-            }}
-            
-       if (cards==12){
+      else if (cards==7){
+         //same as above
          if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
-               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == true){
-          //cant move
-           }
-         else{
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
             chooseMove(cards);
-                        }}      
-           
-       if (cards==13){if (starts.occupied() == true){
-         
-            
            }
-         else if (starts.occupied() == false){
-           }}
-   
+           else{
+           System.out.print(cards);
+            System.exit(0);}}
+            
+      else if (cards==8){
+         //same as above
+          if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(cards);
+           }
+           else{
+           System.out.print(cards);
+            System.exit(0);}}
+            
+      else if (cards==10){
+         //same as above
+         if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(cards);
+           }
+           else{
+           System.out.print(cards);
+            System.exit(0);}}
+            
+      else if (cards==11){
+         //same as above
+         if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(cards);
+           }
+           else{
+           System.out.print(cards);
+            System.exit(0);}}
+            
+       else if (cards==12){
+         //same as above
+         if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(cards);
+           }
+           else{
+           System.out.print(cards);
+            System.exit(0);}}     
+           
+       else if (cards==13){
+         //same as above
+         if ((starts.occupiedBy(pieceOne))&&(starts.occupiedBy(pieceTwo))&&
+               (starts.occupiedBy(pieceThree))&&(starts.occupiedBy(pieceFour)) == false){
+            chooseMove(cards);
+           }
+           else{
+           System.out.print(cards);
+            System.exit(0);}}
+      else{
+      //prints invalid if card not read properly
+      System.out.print("Invalid");
+      }
    
    
    
    }
-   public void chooseMove(int card){
+   public void chooseMove(int card)throws BoardException{
    //call on method that pulls index of pawn and stores it in int called pawnIndex
     boolean flag = true; 
+    
     while(flag = true){
       
-
+      //Uses loop to go through all pawns
       for(int i = 0; i < allPawns.size(); i++){
       
-      
-         Space pawn = allPawns.get(i).getSpace();//Space
+         //gets space that pawn in occupying
+         Space pawn = allPawns.get(i).getSpace();
          
-                              
+         //gets index of that space                    
          int pawnIndex = ((SquareSpace)pawn).getIndex();
+         //adds index to the total card number
          int total = pawnIndex + card;
-       //by a slide
+         //gets space whose index is total
+         SquareSpace moveTo = aSpace.getSpace(total);
+       //Checks if by a slide, moves to that space and changes flag to false
          if ((total % 15 == 9)||(total % 15 == 1)){
-            SquareSpace moveTo = aSpace.getSpace(total);
             Pawn chosen = (Pawn)allPawns.get(i);
             aSpace.movePawn(chosen, moveTo);
-            break;
+            System.out.print(card);
+            flag=false;
       
       }
-    //near safety
-         if (total%15 == 2){
-            SquareSpace moveTo = aSpace.getSpace(total);
+    //Check if by safety, moves to that space and flips flag
+         else if (total%15 == 2){
             Pawn chosen = (Pawn)allPawns.get(i);
             aSpace.movePawn(chosen, moveTo);
-            break;
+            System.out.print(card);
+            flag=false;
       
       }
-   //space occupied
-         SquareSpace givenSpace = aSpace.getSpace(total);
-         if (givenSpace.occupied() == true){
-            Pawn otherPawn = givenSpace.getOccupant();
-            if(otherPawn.getColor() == color){}
+   //Checks in the space is occupied
+         
+         else if (moveTo.occupied() == true){
+            //gets pawn occupying that space
+            Pawn otherPawn = moveTo.getOccupant();
+            //if same color breaks out of for loop
+            if(otherPawn.getColor() == color){
+            break;}
+            //if other color moves to that space and flips flag
             if(otherPawn.getColor() != color){
                Pawn chosen = (Pawn)allPawns.get(i);
-               aSpace.movePawn(chosen, givenSpace);
-               break;
-   }
-   
-   }}}
-   Random rand = new Random();
-   int n = rand.nextInt(4); 
-   Pawn chosen = allPawns.get(n);
-   Space pawn = allPawns.get(n).getSpace();//Space
-   int pawnIndex = ((SquareSpace)pawn).getIndex();
-   int total = pawnIndex + card;
-   SquareSpace moveTo = aSpace.getSpace(total);
-   aSpace.movePawn(chosen, moveTo);
-
-     
- 
-   
-  }
-  }
+               aSpace.movePawn(chosen, moveTo);
+               System.out.print(card);
+               flag=false;
+   } }
+      //breaks out of for loop
+      else{
+         break;
+         }}
+         //if none above are true with randomly pick a pawn from array 
+         Random rand = new Random();
+         int n = rand.nextInt(4); 
+         Pawn chosen = allPawns.get(n);
+         //gets space
+         Space pawn = allPawns.get(n).getSpace();
+         //gets index
+         int pawnIndex = ((SquareSpace)pawn).getIndex();
+         int total = pawnIndex + card;
+         //moves that pawn to that space and  flips flag
+         SquareSpace moveTo = aSpace.getSpace(total);
+         aSpace.movePawn(chosen, moveTo);
+         System.out.print(card);
+         flag =false;
+}}}
