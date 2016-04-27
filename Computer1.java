@@ -21,12 +21,18 @@ public class Computer1{
    
  
    
-   public Computer1(){
+   public Computer1()throws BoardException{
    //Adds pawns to arraylist
    allPawns.add(pieceOne);
    allPawns.add(pieceTwo);
    allPawns.add(pieceThree);
    allPawns.add(pieceFour);
+   starts.placePawn(pieceOne);
+   starts.placePawn(pieceTwo);
+   starts.placePawn(pieceThree);
+   starts.placePawn(pieceFour);
+   moves();
+   
    }
    //move method based on card value
    public void moves()throws BoardException{
@@ -60,11 +66,12 @@ public class Computer1{
                //index 6 instead of 5
                SquareSpace moveTo = aSpace.getSpace(6);
                aSpace.movePawn(allPawns.get(i), moveTo);
-                System.out.print(cards);
+               System.out.print(cards);
                System.exit(0);
                }}}
          else {
            chooseMove(cards);
+           
             }}
       
       else if (cards==3){
@@ -75,8 +82,9 @@ public class Computer1{
            }
           else{
             //can't move and exits
-             System.out.print(cards);
-            System.exit(0);}
+            System.out.print(cards);
+            System.exit(0);
+            }
            }
            
       else if (cards==4){
@@ -86,8 +94,9 @@ public class Computer1{
             chooseMove(-4);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}
+            System.out.print(cards);
+            System.exit(0);
+            }}
            
       else if (cards==5){ 
          //same as above
@@ -96,8 +105,9 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}
+            System.out.print(cards);
+            System.exit(0);
+            }}
             
           
            
@@ -108,8 +118,9 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}
+            System.out.print(cards);
+            System.exit(0);
+            }}
             
       else if (cards==8){
          //same as above
@@ -118,8 +129,9 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}
+            System.out.print(cards);
+            System.exit(0);
+            }}
             
       else if (cards==10){
          //same as above
@@ -128,8 +140,9 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}
+            System.out.print(cards);
+            System.exit(0);
+            }}
             
       else if (cards==11){
          //same as above
@@ -138,8 +151,9 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}
+            System.out.print(cards);
+            System.exit(0);
+            }}
             
        else if (cards==12){
          //same as above
@@ -148,8 +162,9 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}     
+            System.out.print(cards);
+            System.exit(0);
+            }}     
            
        else if (cards==13){
          //same as above
@@ -158,8 +173,9 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-           System.out.print(cards);
-            System.exit(0);}}
+            System.out.print(cards);
+            System.exit(0);
+            }}
       else{
       //prints invalid if card not read properly
       System.out.print("Invalid");
@@ -188,18 +204,25 @@ public class Computer1{
          SquareSpace moveTo = aSpace.getSpace(total);
        //Checks if by a slide, moves to that space and changes flag to false
          if ((total % 15 == 9)||(total % 15 == 1)){
-            Pawn chosen = (Pawn)allPawns.get(i);
-            aSpace.movePawn(chosen, moveTo);
-            System.out.print(card);
-            flag=false;
+            if (pawn.getColor()!=color){
+               Pawn chosen = (Pawn)allPawns.get(i);
+               aSpace.movePawn(chosen, moveTo);
+               System.out.print(card);
+               flag=false;}
+            else{
+               break;
+               }
       
       }
     //Check if by safety, moves to that space and flips flag
          else if (total%15 == 2){
-            Pawn chosen = (Pawn)allPawns.get(i);
-            aSpace.movePawn(chosen, moveTo);
-            System.out.print(card);
-            flag=false;
+            if (pawn.getColor()==color){
+               Pawn chosen = (Pawn)allPawns.get(i);
+               aSpace.movePawn(chosen, moveTo);
+               System.out.print(card);
+               flag=false;}
+            else{
+               break;}
       
       }
    //Checks in the space is occupied
