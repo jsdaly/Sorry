@@ -47,8 +47,6 @@ public class Computer1{
                //Move one space out of home, home is noted to have index 4 then exits
                SquareSpace moveTo = aSpace.getSpace(5);
                aSpace.movePawn(allPawns.get(i), moveTo);
-               
-               System.out.print(cards);
                System.exit(0);
                
                }}}
@@ -66,7 +64,6 @@ public class Computer1{
                //index 6 instead of 5
                SquareSpace moveTo = aSpace.getSpace(6);
                aSpace.movePawn(allPawns.get(i), moveTo);
-               System.out.print(cards);
                System.exit(0);
                }}}
          else {
@@ -82,7 +79,6 @@ public class Computer1{
            }
           else{
             //can't move and exits
-            System.out.print(cards);
             System.exit(0);
             }
            }
@@ -94,7 +90,6 @@ public class Computer1{
             chooseMove(-4);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}
            
@@ -105,7 +100,6 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}
             
@@ -118,7 +112,6 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}
             
@@ -129,7 +122,6 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}
             
@@ -140,7 +132,6 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}
             
@@ -151,7 +142,6 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}
             
@@ -162,7 +152,6 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}     
            
@@ -173,7 +162,6 @@ public class Computer1{
             chooseMove(cards);
            }
            else{
-            System.out.print(cards);
             System.exit(0);
             }}
       else{
@@ -207,7 +195,6 @@ public class Computer1{
             if (pawn.getColor()!=color){
                Pawn chosen = (Pawn)allPawns.get(i);
                aSpace.movePawn(chosen, moveTo);
-               System.out.print(card);
                flag=false;}
             else{
                break;
@@ -219,7 +206,6 @@ public class Computer1{
             if (pawn.getColor()==color){
                Pawn chosen = (Pawn)allPawns.get(i);
                aSpace.movePawn(chosen, moveTo);
-               System.out.print(card);
                flag=false;}
             else{
                break;}
@@ -237,7 +223,6 @@ public class Computer1{
             if(otherPawn.getColor() != color){
                Pawn chosen = (Pawn)allPawns.get(i);
                aSpace.movePawn(chosen, moveTo);
-               System.out.print(card);
                flag=false;
    } }
       //breaks out of for loop
@@ -256,6 +241,5 @@ public class Computer1{
          //moves that pawn to that space and  flips flag
          SquareSpace moveTo = aSpace.getSpace(total);
          aSpace.movePawn(chosen, moveTo);
-         System.out.print(card);
          flag =false;
 }}}
